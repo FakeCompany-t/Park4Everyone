@@ -35,7 +35,7 @@ export default function MapView() {
 
   // ✅ Carica parcheggi dal backend
   useEffect(() => {
-    fetch('http://localhost:10000')
+    fetch('http://localhost:5000/parking')
       .then(res => res.json())
       .then(data => setMarkers(data));
   }, []);
