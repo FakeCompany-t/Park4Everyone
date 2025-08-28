@@ -111,7 +111,7 @@ export default function MapView() {
           {/* Marker parcheggi - visibili solo con zoom >= 16 */}
           {zoom >= 16 &&
             markers.map((m) => (
-              <Marker key={m.id} position={[m.lat, m.lng]}>
+              <Marker key={m.id} position={[parseFloat(m.lat), parseFloat(m.lng)]}>
                 <Popup>
                   <strong>{m.indirizzo}</strong><br />
                   {m.descrizione && <p>{m.descrizione}</p>}
