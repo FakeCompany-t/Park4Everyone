@@ -9,10 +9,16 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 
 // Serve i file statici di React
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist'))); // se usi CRA: '../client/build'
 
-// Connessione al DB
-const db = new sqlite3.Database('./parking.db');
+// Connessione al DB SQLite
+const db = new sqlite3.Database('./parking.db', (err) => {
+  if (err) {
+    console.error('Errore apertura DB:', err.message);
+  } else {
+    console.log('DB connesso correttamente.');
+  }
+});
 
 // API per ottenere i parcheggi
 app.get('/parking', (req, res) => {
@@ -26,11 +32,12 @@ app.get('/parking', (req, res) => {
   });
 });
 
-// Tutte le altre rotte puntano a React
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+// Catch-all per servire React
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist', 'index.html')); // se CRA: '../client/build'
 });
 
+// Avvio server
 app.listen(PORT, () => {
   console.log(`Server avviato su http://localhost:${PORT}`);
 });
