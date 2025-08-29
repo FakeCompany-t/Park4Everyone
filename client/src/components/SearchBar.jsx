@@ -21,7 +21,6 @@ export default function SearchBar({ onSelect }) {
     const value = e.target.value;
     setQuery(value);
 
-    // ✅ debounce per fluidità
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       fetchSuggestions(value);
@@ -40,7 +39,7 @@ export default function SearchBar({ onSelect }) {
   };
 
   return (
-    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-80 z-[2000]">
+    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-80 z-[3000] pointer-events-auto">
       <div className="relative">
         <input
           type="text"
@@ -49,7 +48,6 @@ export default function SearchBar({ onSelect }) {
           placeholder="Cerca un indirizzo..."
           className="w-full px-4 py-2 pr-10 rounded-lg shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        {/* Bottone X per cancellare */}
         {query && (
           <button
             onClick={clearSearch}
@@ -61,12 +59,12 @@ export default function SearchBar({ onSelect }) {
       </div>
 
       {results.length > 0 && (
-        <ul className="absolute w-full bg-white shadow-lg rounded-lg mt-2 max-h-60 overflow-y-auto z-[3000]">
+        <ul className="absolute w-full bg-white shadow-lg rounded-lg mt-2 max-h-60 overflow-y-auto z-[4000] pointer-events-auto">
           {results.map((place, i) => (
             <li
               key={i}
-              onClick={() => handleSelect(place)}        // ✅ PC
-              onTouchStart={() => handleSelect(place)}   // ✅ Mobile
+              onClick={() => handleSelect(place)}        // PC
+              onTouchStart={() => handleSelect(place)}   // Mobile
               className="px-4 py-2 cursor-pointer hover:bg-gray-100"
             >
               {place.display_name}
