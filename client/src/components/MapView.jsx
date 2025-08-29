@@ -26,6 +26,21 @@ const userIcon = new L.Icon({
   popupAnchor: [0, -16],
 });
 
+// ✅ Icona personalizzata per i parcheggi disabili
+const parkingIcon = new L.Icon({
+  iconUrl:
+    "data:image/svg+xml;utf8," +
+    encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="11" fill="#1565C0" stroke="white" stroke-width="2"/>
+        <text x="12" y="17" font-size="12" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold">♿</text>
+      </svg>
+    `),
+  iconSize: [36, 36],
+  iconAnchor: [18, 36],
+  popupAnchor: [0, -36],
+});
+
 export default function MapView() {
   const [markers, setMarkers] = useState([]);
   const [center, setCenter] = useState([44.4056, 8.9463]); // Centro Genova
@@ -108,10 +123,14 @@ export default function MapView() {
             attribution='&copy; OpenStreetMap contributors'
           />
 
-          {/* Marker parcheggi - visibili solo con zoom >= 16 */}
-          {zoom >= 16 &&
+          {/* Marker parcheggi - visibili solo con zoom >= 15 */}
+          {zoom >= 15 &&
             markers.map((m) => (
-              <Marker key={m.id} position={[parseFloat(m.lat), parseFloat(m.lng)]}>
+              <Marker
+                key={m.id}
+                position={[parseFloat(m.lat), parseFloat(m.lng)]}
+                icon={parkingIcon}
+              >
                 <Popup>
                   <strong>{m.indirizzo}</strong><br />
                   {m.descrizione && <p>{m.descrizione}</p>}
