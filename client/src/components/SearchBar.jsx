@@ -65,8 +65,8 @@ export default function SearchBar({ onSelect }) {
           {results.map((place, i) => (
             <li
               key={i}
-              onClick={() => handleSelect(place)}
-              onTouchStart={() => handleSelect(place)} // ✅ fix mobile
+              onClick={() => handleSelect(place)}        // ✅ PC
+              onTouchStart={() => handleSelect(place)}   // ✅ Mobile
               className="px-4 py-2 cursor-pointer hover:bg-gray-100"
             >
               {place.display_name}
