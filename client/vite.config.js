@@ -7,12 +7,12 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.svg", "favicon.ico", "robots.txt", "apple-touch-icon.png"],
+      includeAssets: ["favicon.svg", "robots.txt", "apple-touch-icon.png"],
       manifest: {
         name: "Park4All",
         short_name: "Park4All",
         description: "Trova parcheggi facilmente con Park4All",
-        theme_color: "#2563eb", // blu della navbar
+        theme_color: "#2563eb",
         background_color: "#ffffff",
         display: "standalone",
         start_url: "/",
@@ -28,7 +28,7 @@ export default defineConfig({
             type: "image/png",
           },
           {
-            src: "pwa-512x512.png",
+            src: "pwa-maskable-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
