@@ -10,8 +10,8 @@ export default function Navbar() {
         
         {/* Logo + Titolo */}
         <div className="flex items-center space-x-2">
-          <img src="/park4all.svg" alt="Park4All logo" className="h-10 w-10" />
-          <h1 className="text-2xl font-bold">Park4All</h1>
+          <img src="/Park4Everyone.svg" alt="Park4All logo" className="h-10 w-10" />
+          <h1 className="text-2xl font-bold">Park4Everyone</h1>
         </div>
 
         {/* Menu desktop */}

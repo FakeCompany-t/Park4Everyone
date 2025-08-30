@@ -9,9 +9,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "robots.txt", "apple-touch-icon.png"],
       manifest: {
-        name: "Park4All",
-        short_name: "Park4All",
-        description: "Trova parcheggi facilmente con Park4All",
+        name: "Park4Everyone",
+        short_name: "Park4Everyone",
+        description: "Trova parcheggi facilmente con Park4Everyone",
         theme_color: "#2563eb",
         background_color: "#ffffff",
         display: "standalone",
