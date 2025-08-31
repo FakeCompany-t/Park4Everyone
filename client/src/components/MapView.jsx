@@ -28,10 +28,10 @@ const userIcon = new L.Icon({
 
 // ✅ Icona personalizzata per i parcheggi disabili
 const parkingIcon = new L.Icon({
-  iconUrl: "/marker.svg", // <-- percorso in public/icons/
-  iconSize: [40, 40],           // regola se serve
-  iconAnchor: [20, 40],         // ancora al centro in basso
-  popupAnchor: [0, -40],        // popup sopra l’icona
+  iconUrl: "/marker.svg",
+  iconSize: [50, 50],           // 🔥 più grande
+  iconAnchor: [25, 50],         // ancorato al centro in basso
+  popupAnchor: [0, -50],        // popup sopra l’icona
 });
 
 export default function MapView() {
@@ -48,7 +48,7 @@ export default function MapView() {
       .then(data => setMarkers(data));
   }, []);
 
-  // ✅ Aggiorna zoom per mostrare i marker solo da vicino
+  // ✅ Aggiorna zoom
   const handleZoom = () => {
     if (mapRef.current) {
       setZoom(mapRef.current.getZoom());
@@ -65,7 +65,7 @@ export default function MapView() {
           const lng = pos.coords.longitude;
           setUserPos([lat, lng]);
           setCenter([lat, lng]);
-          map.flyTo([lat, lng], 16); // zoom più vicino
+          map.flyTo([lat, lng], 16);
         });
       } else {
         alert("Geolocalizzazione non supportata");
@@ -85,7 +85,7 @@ export default function MapView() {
     );
   }
 
-  // ✅ Callback quando l'utente seleziona un indirizzo dalla SearchBar
+  // ✅ Callback SearchBar
   const handleSelectPlace = (coords) => {
     const lat = parseFloat(coords[0]);
     const lon = parseFloat(coords[1]);
@@ -98,10 +98,10 @@ export default function MapView() {
   return (
     <div className="flex justify-center px-4 py-6">
       <div className="relative w-full max-w-6xl">
-        {/* Barra ricerca con suggerimenti */}
+        {/* Barra ricerca */}
         <SearchBar onSelect={handleSelectPlace} />
 
-        {/* Mappa centrata e responsiva */}
+        {/* Mappa */}
         <MapContainer
           center={center}
           zoom={zoom}
@@ -116,7 +116,7 @@ export default function MapView() {
             attribution='&copy; OpenStreetMap contributors'
           />
 
-          {/* Marker parcheggi - visibili solo con zoom >= 14 */}
+          {/* Marker parcheggi */}
           {zoom >= 14 &&
             markers.map((m) => (
               <Marker
@@ -126,37 +126,32 @@ export default function MapView() {
               >
                 <Popup>
                   <div className="p-3 bg-white rounded-xl shadow-md text-gray-800 w-60">
-                    {/* Titolo indirizzo */}
                     <h3 className="font-bold text-lg text-blue-600 mb-1">
                       {m.indirizzo}
                     </h3>
 
-                    {/* Descrizione opzionale */}
                     {m.descrizione && (
                       <p className="text-sm text-gray-600 mb-2">{m.descrizione}</p>
                     )}
 
-                    {/* Comune */}
                     <p className="text-xs text-gray-500 mb-3">
                       📍 {m.comune}
                     </p>
 
-                    {/* Bottone Google Maps */}
                     <a
                       href={`https://www.google.com/maps/dir/?api=1&destination=${m.lat},${m.lng}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full text-center bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                      className="block w-full text-center bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition !text-white"
                     >
-                      Apri in Google Maps
+                      Vai con Google Maps
                     </a>
                   </div>
                 </Popup>
               </Marker>
             ))}
 
-
-          {/* Marker posizione utente con icona personalizzata */}
+          {/* Marker utente */}
           {userPos && (
             <Marker position={userPos} icon={userIcon}>
               <Popup>Sei qui</Popup>
