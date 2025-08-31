@@ -10,15 +10,23 @@ export default function Navbar() {
         
         {/* Logo + Titolo */}
         <div className="flex items-center space-x-2">
-          <img src="/Park4Everyone.svg" alt="Park4All logo" className="h-10 w-10" />
+          <img src="/Park4Everyone.svg" alt="Park4Everyone logo" className="h-10 w-10" />
           <h1 className="text-2xl font-bold">Park4Everyone</h1>
         </div>
 
         {/* Menu desktop */}
         <ul className="hidden md:flex space-x-6">
-          <li><a href="#" className="hover:underline">Home</a></li>
-          <li><a href="#" className="hover:underline">Chi Siamo</a></li>
-          <li><a href="#" className="hover:underline">Contatti</a></li>
+          {["Home", "Chi Siamo", "Contatti"].map((item) => (
+            <li key={item}>
+              <a
+                href="#"
+                className="px-3 py-1 rounded-lg transition-all duration-300 
+                           hover:bg-white/20 hover:text-gray-100"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
 
         {/* Bottone mobile */}
@@ -34,9 +42,21 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden mt-4">
           <ul className="flex flex-col space-y-2 text-center">
-            <li><a href="#" className="block py-2 hover:bg-blue-700 rounded">Home</a></li>
-            <li><a href="#" className="block py-2 hover:bg-blue-700 rounded">Chi Siamo</a></li>
-            <li><a href="#" className="block py-2 hover:bg-blue-700 rounded">Contatti</a></li>
+            <li>
+              <a href="#" className="block py-2 hover:bg-blue-700 rounded">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" className="block py-2 hover:bg-blue-700 rounded">
+                Chi Siamo
+              </a>
+            </li>
+            <li>
+              <a href="#" className="block py-2 hover:bg-blue-700 rounded">
+                Contatti
+              </a>
+            </li>
           </ul>
         </div>
       )}

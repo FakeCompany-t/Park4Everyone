@@ -8,7 +8,7 @@ export default function SearchBar({ onSelect }) {
   const fetchSuggestions = async (value) => {
     if (value.length > 2) {
       const res = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=it`
       );
       const data = await res.json();
       setResults(data);

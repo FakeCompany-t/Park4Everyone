@@ -28,17 +28,10 @@ const userIcon = new L.Icon({
 
 // ✅ Icona personalizzata per i parcheggi disabili
 const parkingIcon = new L.Icon({
-  iconUrl:
-    "data:image/svg+xml;utf8," +
-    encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="11" fill="#1565C0" stroke="white" stroke-width="2"/>
-        <text x="12" y="17" font-size="12" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold">♿</text>
-      </svg>
-    `),
-  iconSize: [36, 36],
-  iconAnchor: [18, 36],
-  popupAnchor: [0, -36],
+  iconUrl: "/marker.svg", // <-- percorso in public/icons/
+  iconSize: [40, 40],           // regola se serve
+  iconAnchor: [20, 40],         // ancora al centro in basso
+  popupAnchor: [0, -40],        // popup sopra l’icona
 });
 
 export default function MapView() {
@@ -123,8 +116,8 @@ export default function MapView() {
             attribution='&copy; OpenStreetMap contributors'
           />
 
-          {/* Marker parcheggi - visibili solo con zoom >= 15 */}
-          {zoom >= 15 &&
+          {/* Marker parcheggi - visibili solo con zoom >= 14 */}
+          {zoom >= 14 &&
             markers.map((m) => (
               <Marker
                 key={m.id}
@@ -132,20 +125,36 @@ export default function MapView() {
                 icon={parkingIcon}
               >
                 <Popup>
-                  <strong>{m.indirizzo}</strong><br />
-                  {m.descrizione && <p>{m.descrizione}</p>}
-                  <em>{m.comune}</em><br />
-                  <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${m.lat},${m.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 underline"
-                  >
-                    Vai con Google Maps
-                  </a>
+                  <div className="p-3 bg-white rounded-xl shadow-md text-gray-800 w-60">
+                    {/* Titolo indirizzo */}
+                    <h3 className="font-bold text-lg text-blue-600 mb-1">
+                      {m.indirizzo}
+                    </h3>
+
+                    {/* Descrizione opzionale */}
+                    {m.descrizione && (
+                      <p className="text-sm text-gray-600 mb-2">{m.descrizione}</p>
+                    )}
+
+                    {/* Comune */}
+                    <p className="text-xs text-gray-500 mb-3">
+                      📍 {m.comune}
+                    </p>
+
+                    {/* Bottone Google Maps */}
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${m.lat},${m.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                    >
+                      Apri in Google Maps
+                    </a>
+                  </div>
                 </Popup>
               </Marker>
             ))}
+
 
           {/* Marker posizione utente con icona personalizzata */}
           {userPos && (
