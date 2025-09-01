@@ -30,7 +30,7 @@ const userIcon = new L.Icon({
 const parkingIcon = new L.Icon({
   iconUrl: "/marker.svg",
   iconSize: [50, 50],           // 🔥 più grande
-  iconAnchor: [25, 50],         // ancorato al centro in basso
+  iconAnchor: [25, 52],         // ancorato al centro in basso
   popupAnchor: [0, -50],        // popup sopra l’icona
 });
 
