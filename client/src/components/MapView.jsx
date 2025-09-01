@@ -29,8 +29,8 @@ const userIcon = new L.Icon({
 // ✅ Icona personalizzata per i parcheggi disabili
 const parkingIcon = new L.Icon({
   iconUrl: "/marker.svg",
-  iconSize: [35, 35],           // 🔥 più grande
-  iconAnchor: [25, 50],         // ancorato al centro in basso
+  iconSize: [32, 32],           // 🔥 più grande
+  iconAnchor: [16, 32],         // ancorato al centro in basso
   popupAnchor: [0, -50],        // popup sopra l’icona
 });
 
