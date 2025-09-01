@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import MapView from "./components/MapView";
 import Footer from "./components/Footer";
+import InstallPrompt from "./components/InstallPrompt";
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
         <MapView />
       </main>
       <Footer />
+      {/* Popup installazione PWA */}
+      <InstallPrompt />
     </div>
   );
 }
