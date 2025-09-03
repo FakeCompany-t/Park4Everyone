@@ -1,15 +1,16 @@
-import { useEffect, useState, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import SearchBar from './SearchBar';
+import { useEffect, useState, useRef } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import SearchBar from "./SearchBar";
+import LocateButton from "./LocateButton";
 
 // ✅ Fix icone default Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
 // ✅ Icona personalizzata per la posizione utente
@@ -29,9 +30,9 @@ const userIcon = new L.Icon({
 // ✅ Icona personalizzata per i parcheggi disabili
 const parkingIcon = new L.Icon({
   iconUrl: "/marker.svg",
-  iconSize: [32, 32],           // 🔥 più grande
-  iconAnchor: [16, 32],         // ancorato al centro in basso
-  popupAnchor: [0, -50],        // popup sopra l’icona
+  iconSize: [32, 32], // dimensioni icona
+  iconAnchor: [16, 32], // punta in basso
+  popupAnchor: [0, -32], // popup sopra l’icona
 });
 
 export default function MapView() {
@@ -43,9 +44,9 @@ export default function MapView() {
 
   // ✅ Carica parcheggi dal backend
   useEffect(() => {
-    fetch('/parking')
-      .then(res => res.json())
-      .then(data => setMarkers(data));
+    fetch("/parking")
+      .then((res) => res.json())
+      .then((data) => setMarkers(data));
   }, []);
 
   // ✅ Aggiorna zoom
@@ -54,36 +55,6 @@ export default function MapView() {
       setZoom(mapRef.current.getZoom());
     }
   };
-
-  // ✅ Componente bottone localizzazione
-  function LocateButton() {
-    const map = useMap();
-    const locateUser = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((pos) => {
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
-          setUserPos([lat, lng]);
-          setCenter([lat, lng]);
-          map.flyTo([lat, lng], 16);
-        });
-      } else {
-        alert("Geolocalizzazione non supportata");
-      }
-    };
-
-    return (
-      <div
-        onClick={locateUser}
-        className="absolute bottom-4 right-4 bg-white rounded-full shadow-lg p-3 cursor-pointer hover:bg-gray-100 z-[1000]"
-        style={{ width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="gray" viewBox="0 0 24 24">
-          <path d="M12 8a4 4 0 100 8 4 4 0 000-8zm9 3h-2.07A7.002 7.002 0 0013 5.07V3h-2v2.07A7.002 7.002 0 005.07 11H3v2h2.07A7.002 7.002 0 0011 18.93V21h2v-2.07A7.002 7.002 0 0018.93 13H21v-2z" />
-        </svg>
-      </div>
-    );
-  }
 
   // ✅ Callback SearchBar
   const handleSelectPlace = (coords) => {
@@ -107,7 +78,7 @@ export default function MapView() {
           zoom={zoom}
           ref={mapRef}
           whenReady={(map) => {
-            map.target.on('zoomend', handleZoom);
+            map.target.on("zoomend", handleZoom);
           }}
           className="w-full h-[70vh] rounded-xl shadow-lg"
         >
@@ -131,12 +102,12 @@ export default function MapView() {
                     </h3>
 
                     {m.descrizione && (
-                      <p className="text-sm text-gray-600 mb-2">{m.descrizione}</p>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {m.descrizione}
+                      </p>
                     )}
 
-                    <p className="text-xs text-gray-500 mb-3">
-                      📍 {m.comune}
-                    </p>
+                    <p className="text-xs text-gray-500 mb-3">📍 {m.comune}</p>
 
                     <a
                       href={`https://www.google.com/maps/dir/?api=1&destination=${m.lat},${m.lng}`}
@@ -159,7 +130,7 @@ export default function MapView() {
           )}
 
           {/* Bottone localizzazione */}
-          <LocateButton />
+          <LocateButton setUserPos={setUserPos} setCenter={setCenter} />
         </MapContainer>
       </div>
     </div>
