@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react"; // icone (installate con `npm i lucide-react`)
+import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,7 +8,6 @@ export default function Navbar() {
   return (
     <nav className="bg-blue-600 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        
         {/* Logo + Titolo */}
         <div className="flex items-center space-x-2">
           <img src="/Park4Everyone.svg" alt="Park4Everyone logo" className="h-10 w-10" />
@@ -16,24 +16,13 @@ export default function Navbar() {
 
         {/* Menu desktop */}
         <ul className="hidden md:flex space-x-6">
-          {["Home", "Chi Siamo", "Contatti"].map((item) => (
-            <li key={item}>
-              <a
-                href="#"
-                className="px-3 py-1 rounded-lg transition-all duration-300 
-                           hover:bg-white/20 hover:text-gray-100"
-              >
-                {item}
-              </a>
-            </li>
-          ))}
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/segnalazioni">Segnalazioni</Link></li>
+          <li><Link to="/contatti">Contatti</Link></li>
         </ul>
 
         {/* Bottone mobile */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
@@ -42,21 +31,9 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden mt-4">
           <ul className="flex flex-col space-y-2 text-center">
-            <li>
-              <a href="#" className="block py-2 hover:bg-blue-700 rounded">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block py-2 hover:bg-blue-700 rounded">
-                Chi Siamo
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block py-2 hover:bg-blue-700 rounded">
-                Contatti
-              </a>
-            </li>
+            <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
+            <li><Link to="/segnalazioni" onClick={() => setIsOpen(false)}>Segnalazioni</Link></li>
+            <li><Link to="/contatti" onClick={() => setIsOpen(false)}>Contatti</Link></li>
           </ul>
         </div>
       )}
