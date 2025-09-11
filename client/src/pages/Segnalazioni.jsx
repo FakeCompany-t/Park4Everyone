@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "emailjs-com";
 
 export default function Segnalazioni() {
   const form = useRef();
+  const [statusMessage, setStatusMessage] = useState("");
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -16,12 +17,12 @@ export default function Segnalazioni() {
       )
       .then(
         () => {
-          alert("✅ Segnalazione inviata con successo!");
+          setStatusMessage("✅ Segnalazione inviata con successo!");
           form.current.reset();
         },
         (error) => {
           console.error(error.text);
-          alert("❌ Errore nell'invio della segnalazione.");
+          setStatusMessage("❌ Errore nell'invio della segnalazione.");
         }
       );
   };
@@ -39,20 +40,27 @@ export default function Segnalazioni() {
       <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
         <form ref={form} onSubmit={sendEmail} className="space-y-4">
           <div>
-            <label className="block text-gray-700 font-medium">Indirizzo *</label>
+            <label htmlFor="indirizzo" className="block text-gray-700 font-medium">
+              Indirizzo <span aria-hidden="true">*</span>
+            </label>
             <input
               type="text"
+              id="indirizzo"
               name="indirizzo"
               required
+              aria-required="true"
               className="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
               placeholder="Inserisci l'indirizzo"
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Coordinate (lat, lon)</label>
+            <label htmlFor="coordinate" className="block text-gray-700 font-medium">
+              Coordinate (lat, lon)
+            </label>
             <input
               type="text"
+              id="coordinate"
               name="coordinate"
               className="w-full mt-1 p-2 border rounded-lg"
               placeholder="Es: 44.4056, 8.9463"
@@ -60,9 +68,12 @@ export default function Segnalazioni() {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Link Google Maps</label>
+            <label htmlFor="link_maps" className="block text-gray-700 font-medium">
+              Link Google Maps
+            </label>
             <input
               type="url"
+              id="link_maps"
               name="link_maps"
               className="w-full mt-1 p-2 border rounded-lg"
               placeholder="https://maps.google.com/..."
@@ -70,8 +81,11 @@ export default function Segnalazioni() {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Note aggiuntive</label>
+            <label htmlFor="note" className="block text-gray-700 font-medium">
+              Note aggiuntive
+            </label>
             <textarea
+              id="note"
               name="note"
               rows="3"
               className="w-full mt-1 p-2 border rounded-lg"
@@ -81,11 +95,22 @@ export default function Segnalazioni() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg shadow hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg shadow hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Invia segnalazione
           </button>
         </form>
+
+        {/* Stato invio accessibile */}
+        {statusMessage && (
+          <p
+            className="mt-4 text-center text-sm"
+            role="status"
+            aria-live="polite"
+          >
+            {statusMessage}
+          </p>
+        )}
       </div>
     </div>
   );
