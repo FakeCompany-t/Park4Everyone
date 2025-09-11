@@ -41,18 +41,12 @@ const userIcon = new L.Icon({
   popupAnchor: [0, -16],
 });
 
-// ✅ Icona personalizzata per parcheggi (SVG inline)
+// ✅ Icona personalizzata per i parcheggi disabili
 const parkingIcon = new L.Icon({
-  iconUrl:
-    "data:image/svg+xml;base64," +
-    btoa(`
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-        <path d="M16 2C9.4 2 4 7.4 4 14c0 9.3 12 18 12 18s12-8.7 12-18c0-6.6-5.4-12-12-12zm0 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="#1976D2"/>
-      </svg>
-    `),
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
+  iconUrl: "/marker.svg",
+  iconSize: [32, 32], // dimensioni icona
+  iconAnchor: [16, 32], // punta in basso
+  popupAnchor: [0, -32], // popup sopra l’icona
 });
 
 export default function MapView() {
@@ -121,10 +115,7 @@ export default function MapView() {
                   icon={parkingIcon}
                 >
                   <Popup>
-                    <div
-                      className="p-3 bg-white rounded-xl shadow-md text-gray-800 w-60"
-                      aria-label={`Parcheggio a ${m.indirizzo}`}
-                    >
+                    <div className="p-3 bg-white rounded-xl shadow-md text-gray-800 w-60">
                       <h3 className="font-bold text-lg text-blue-600 mb-1">
                         {m.indirizzo}
                       </h3>
@@ -141,8 +132,7 @@ export default function MapView() {
                         href={`https://www.google.com/maps/dir/?api=1&destination=${m.lat},${m.lng}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Ottieni indicazioni per ${m.indirizzo}`}
-                        className="block w-full text-center bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                        className="block w-full text-center bg-blue-600 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-700 transition !text-white"
                       >
                         Vai con Google Maps
                       </a>
