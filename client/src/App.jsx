@@ -4,6 +4,7 @@ import MapView from "./components/MapView";
 import Footer from "./components/Footer";
 import InstallPrompt from "./components/InstallPrompt";
 import Segnalazioni from "./pages/Segnalazioni";
+import Contatti from "./pages/Contatti"; // ✅ Nuovo import
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
             }
           />
           <Route path="/segnalazioni" element={<Segnalazioni />} />
+          <Route path="/contatti" element={<Contatti />} /> {/* ✅ Nuova rotta */}
         </Routes>
       </main>
       <Footer />
