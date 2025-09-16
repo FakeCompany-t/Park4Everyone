@@ -9,12 +9,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 
 // Serve i file statici di React
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist'))); // se usi CRA: '../client/build'
 
 // Connessione al DB Postgres su Render
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  connectionString: process.env.DATABASE_URL, // Render fornisce DATABASE_URL come variabile d'ambiente
+  ssl: {
+    rejectUnauthorized: false // necessario su Render
+  }
 });
 
 // Test connessione DB
@@ -38,18 +40,9 @@ app.get('/parking', async (req, res) => {
   }
 });
 
-// 👉 Serve robots.txt e sitemap.xml PRIMA del catch-all
-app.get('/robots.txt', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'robots.txt'));
-});
-
-app.get('/sitemap.xml', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'sitemap.xml'));
-});
-
 // Catch-all per servire React
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/dist', 'index.html')); // se CRA: '../client/build'
 });
 
 // Avvio server
