@@ -1,57 +1,45 @@
 export default function Contatti() {
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-700">
-        Contatti
-      </h2>
+    return (
+        <div className="max-w-5xl mx-auto px-4 py-12 space-y-12">
+            {/* Titolo pagina */}
+            <h2 className="text-3xl font-bold text-center text-gray-700">
+                Contatti & Presentazione
+            </h2>
 
-      <div className="bg-white p-8 rounded-xl shadow-md space-y-6">
-        <div>
-          <h3 className="text-xl font-semibold mb-2 text-blue-600">Indirizzo</h3>
-          <p>Via Esempio 123, 16100 Genova, Italia</p>
-        </div>
+            {/* Sezione Descrizione Progetto */}
+            <div className="bg-white p-8 rounded-xl shadow-md space-y-4">
+                <h3 className="text-2xl font-semibold text-blue-600 mb-2">
+                    Chi siamo
+                </h3>
+                <p className="text-gray-700">
+                    Park4Everyone è un progetto dedicato a facilitare la ricerca di parcheggi accessibili e sicuri per tutti.
+                    La nostra missione è semplificare la vita agli automobilisti e promuovere una mobilità più inclusiva.
+                </p>
+                <p className="text-gray-700">
+                    Se sei un’azienda interessata a collaborare o integrare i nostri servizi, sei nel posto giusto!
+                </p>
+            </div>
 
-        <div>
-          <h3 className="text-xl font-semibold mb-2 text-blue-600">Telefono</h3>
-          <p>+39 010 1234567</p>
-        </div>
+            {/* Sezione Contatti Azienda */}
+            <div className="bg-white p-8 rounded-xl shadow-md space-y-4">
+                <h3 className="text-2xl font-semibold text-blue-600 mb-2">
+                    Contatti Azienda
+                </h3>
+                <p><strong>Nome Azienda:</strong> Park4Everyone S.r.l.</p>
+                <p><strong>Indirizzo:</strong> Via Esempio 123, 16100 Genova, Italia</p>
+                <p><strong>Email:</strong> <a href="mailto:info@park4everyone.it" className="text-blue-600 underline">info@park4everyone.it</a></p>
+                <p><strong>Telefono:</strong> +39 010 1234567</p>
+            </div>
 
-        <div>
-          <h3 className="text-xl font-semibold mb-2 text-blue-600">Email</h3>
-          <p>
-            <a href="mailto:info@park4everyone.it" className="text-blue-600 underline">
-              info@park4everyone.it
-            </a>
-          </p>
+            {/* Sezione Contatti Personali (opzionale) */}
+            <div className="bg-white p-8 rounded-xl shadow-md space-y-4">
+                <h3 className="text-2xl font-semibold text-blue-600 mb-2">
+                    Contatti Diretti
+                </h3>
+                <p><strong>Referente:</strong> Mario Rossi</p>
+                <p><strong>Email:</strong> <a href="mailto:mario.rossi@email.com" className="text-blue-600 underline">mario.rossi@email.com</a></p>
+                <p><strong>Telefono:</strong> +39 333 1234567</p>
+            </div>
         </div>
-
-        <div>
-          <h3 className="text-xl font-semibold mb-2 text-blue-600">Modulo di contatto</h3>
-          <form className="space-y-4">
-            <input
-              type="text"
-              placeholder="Nome"
-              className="w-full border border-gray-300 rounded-lg p-2"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border border-gray-300 rounded-lg p-2"
-            />
-            <textarea
-              placeholder="Messaggio"
-              rows={4}
-              className="w-full border border-gray-300 rounded-lg p-2"
-            />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-            >
-              Invia
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
