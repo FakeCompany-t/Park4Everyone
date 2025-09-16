@@ -12,7 +12,7 @@ export default function Contatti() {
                     Chi siamo
                 </h3>
                 <p className="text-gray-700">
-                    Park4Everyone è un progetto dedicato a facilitare la ricerca di parcheggi accessibili e sicuri per tutti.
+                    Park4Everyone è un progetto dedicato a facilitare la ricerca di posti auto per disabili nel territorio genovese.
                     La nostra missione è semplificare la vita agli automobilisti e promuovere una mobilità più inclusiva.
                 </p>
                 <p className="text-gray-700">
@@ -23,12 +23,10 @@ export default function Contatti() {
             {/* Sezione Contatti Azienda */}
             <div className="bg-white p-8 rounded-xl shadow-md space-y-4">
                 <h3 className="text-2xl font-semibold text-blue-600 mb-2">
-                    Contatti Azienda
+                    Contatti 
                 </h3>
-                <p><strong>Nome Azienda:</strong> Park4Everyone S.r.l.</p>
-                <p><strong>Indirizzo:</strong> Via Esempio 123, 16100 Genova, Italia</p>
-                <p><strong>Email:</strong> <a href="mailto:info@park4everyone.it" className="text-blue-600 underline">info@park4everyone.it</a></p>
-                <p><strong>Telefono:</strong> +39 010 1234567</p>
+                <p><strong>Nome Progetto:</strong> Park4Everyone </p>
+                <p><strong>Email:</strong> <a href="mailto:park4everyone@gmail.com" className="text-blue-600 underline">park4everyone@gmail.com</a></p>
             </div>
 
             {/* Sezione Contatti Personali (opzionale) */}
@@ -36,9 +34,8 @@ export default function Contatti() {
                 <h3 className="text-2xl font-semibold text-blue-600 mb-2">
                     Contatti Diretti
                 </h3>
-                <p><strong>Referente:</strong> Mario Rossi</p>
-                <p><strong>Email:</strong> <a href="mailto:mario.rossi@email.com" className="text-blue-600 underline">mario.rossi@email.com</a></p>
-                <p><strong>Telefono:</strong> +39 333 1234567</p>
+                <p><strong>Referente:</strong> Matteo Guglielmo Amore</p>
+                <p><strong>Telefono:</strong> +39 3491345670</p>
             </div>
         </div>
     );
